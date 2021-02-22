@@ -7,7 +7,25 @@ class Student:
         self.courses_in_progress = []
         self.grades = {}
 
+    def return_grades(self):
+        '''
+        Посмотреть все оценки студента
+        '''
+        return f'"{self.name} {self.surname}" - {self.grades}'
 
+    def rate_lecture(self, lecturer, course, grade):
+        '''
+        Позволяет оценить лектора
+        '''
+        if isinstance(lecturer, Lecturer) and course in self.courses_in_progress and course in lecturer.courses_attached:
+            if course in lecturer.grades:
+                lecturer.grades[course] += [grade]
+            else:
+                lecturer.grades[course] = [grade]
+        else:
+            return 'Ошибка'
+
+        
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
