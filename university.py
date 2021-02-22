@@ -61,6 +61,16 @@ class Student:
             return 'Not a Student!'
         return self.average_rate_hw() < other.average_rate_hw()
 
+def average_rate_students(course, *args):
+    '''
+    Средняя оценка за лекции всех студентов за курс
+    '''
+    overall_score = []
+    for student in args:
+        if course in student.courses_in_progress:
+            overall_score.append(float((student.average_rate(course)).split(" ")[-1]))
+            general_ball_students = round(sum(overall_score) / len(overall_score), 2)
+    return f'Средняя оценка за лекции всех студентов по "Python": {general_ball_students}'
 
 
 class Mentor:
@@ -109,6 +119,17 @@ class Lecturer(Mentor):
         if not isinstance(other, Lecturer):
             return'Not a Lecturer!'
         return self.average_rate_all() < other.average_rate_all()
+
+def average_rate_lecturers(course, *args):
+    '''
+    Средняя оценка за лекции всех лекторов за курс
+    '''
+    overall_score = []
+    for lecturer in args:
+        if course in lecturer.courses_attached:
+            overall_score.append(float((lecturer.average_rate(course)).split(" ")[-1]))
+            general_ball_lecturers = round(sum(overall_score) / len(overall_score), 2)
+    return f'Средняя оценка за лекции всех лекторов по "Python": {general_ball_lecturers}'
 
 
 class Reviewer(Mentor):
