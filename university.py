@@ -53,6 +53,14 @@ class Student:
         return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашние задания: {(self.average_rate_hw()).split(" ")[-1]}\n' \
                f'Курсы в процессе изучения: {self.courses_in_progress}\nЗавершенные курсы: {self.finished_courses}'
 
+    def __lt__(self, other):
+        '''
+        Сравнить студентов по среднему баллу за ДЗ
+        '''
+        if not isinstance(other, Student):
+            return 'Not a Student!'
+        return self.average_rate_hw() < other.average_rate_hw()
+
 
 
 class Mentor:
@@ -94,7 +102,13 @@ class Lecturer(Mentor):
         '''
         return f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {(self.average_rate_all().split(" ")[-1])}'
 
-
+    def __lt__(self, other):
+        '''
+        Сравнить лекторов по среднему баллу за лекции
+        '''
+        if not isinstance(other, Lecturer):
+            return'Not a Lecturer!'
+        return self.average_rate_all() < other.average_rate_all()
 
 
 class Reviewer(Mentor):
